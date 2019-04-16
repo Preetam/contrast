@@ -1,0 +1,21 @@
+{
+  "name": "shadow-notes",
+  "version": "1.0.0",
+  "description": "Shadow Notes app",
+  "scripts": {
+    "test": "ospec",
+    "start": "webpack --config webpack.dev.js --watch",
+    "build": "webpack --config webpack.prod.js"
+  },
+  "keywords": [],
+  "repository": "github.com/Preetam/shadow-notes",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "mithril": "^1.1.6",
+    "showdown": "^1.9.0"
+  },
+  "devDependencies": {
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.3"
+  }
+}
