@@ -11,6 +11,8 @@
   "repository": "github.com/Preetam/shadow-notes",
   "license": "UNLICENSED",
   "dependencies": {
+    "clean-css": "^4.2.1",
+    "clean-css-cli": "^4.3.0",
     "mithril": "^1.1.6",
     "showdown": "^1.9.0"
   },

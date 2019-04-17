@@ -5,7 +5,7 @@ var converter = new showdown.Converter()
 
 var Editor = {
 	oninit: function(vnode) {
-		vnode.state.noteID = m.route.param("id");
+		vnode.state.noteID = m.route.param("key");
 		vnode.state.md = '';
 		vnode.state.html = '';
 		vnode.state.timer = 0;
@@ -31,20 +31,21 @@ var Editor = {
 					if (vnode.state.timer === 0) {
 						vnode.state.status = "Rendering...";
 						vnode.state.timer = setTimeout(function() {
-							vnode.state.html = converter.makeHtml(vnode.state.md);
 							vnode.state.timer = 0;
+							vnode.state.html = converter.makeHtml(vnode.state.md);
 							vnode.state.status = "OK";
 
 							m.redraw()
 							vnode.state.status = "Saving...";
 							vnode.state.timer = setTimeout(function() {
+								vnode.state.html = converter.makeHtml(vnode.state.md);
 								vnode.state.save();
 								vnode.state.timer = 0;
 								vnode.state.status = "OK";
 
 								m.redraw()
-							}, 100);
-						}, 100);
+							}, 10);
+						}, 10);
 					}
 				}
 			}, vnode.state.md),
@@ -93,5 +94,5 @@ var MainPage = {
 
 m.route(document.getElementById("app"), "/", {
 	"/": MainPage,
-	"/edit/:id": EditorPage,
+	"/edit/:key": EditorPage,
 });
