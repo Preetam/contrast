@@ -35,7 +35,7 @@ var Editor = {
 							vnode.state.html = converter.makeHtml(vnode.state.md);
 							vnode.state.status = "OK";
 
-							m.redraw()
+							m.redraw();
 							vnode.state.status = "Saving...";
 							vnode.state.timer = setTimeout(function() {
 								vnode.state.html = converter.makeHtml(vnode.state.md);
@@ -43,7 +43,7 @@ var Editor = {
 								vnode.state.timer = 0;
 								vnode.state.status = "OK";
 
-								m.redraw()
+								m.redraw();
 							}, 10);
 						}, 10);
 					}
@@ -55,6 +55,64 @@ var Editor = {
 	}
 }
 
+var NotesList = {
+	view: function(vnode) {
+		let list = [];
+		for (var i = 0; i < localStorage.length; i++) {
+			let key = localStorage.key(i);
+			if (key.startsWith("note-")) {
+				let noteName = key.replace("note-", "");
+				list.push(m("li", [
+					m("a.sn-note-list-link", {oncreate: m.route.link, href: "/edit/"+noteName}, noteName),
+					m("div", [
+						m("a.sn-delete-link", {onclick: function() {
+							if (confirm("Are you sure you want to delete this note?")) {
+								localStorage.removeItem(key);
+							}
+						}}, "Delete"),
+					])
+				]));
+			}
+		}
+		list.sort(function(a, b) {
+			let x = a.children[0].text.toLowerCase();
+			let y = b.children[0].text.toLowerCase();
+			if (x < y) {return -1};
+			if (x > y) {return 1};
+			return 0;
+		});
+		return m("ul.sn-notes-list", list);
+	}
+}
+
+var NewNoteForm = {
+	oninit: function(vnode) {
+		vnode.state.name = "";
+		vnode.state.valid = false;
+	},
+	view: function(vnode) {
+		let inputField = m("input.sn-create-input", {
+			oninput: function(e) {
+				vnode.state.name = e.target.value;
+				vnode.state.valid = /^[a-zA-Z0-9-]+$/.test(vnode.state.name);
+			}
+		});
+		let createButton = m("a", {
+			class: vnode.state.valid ? "sn-create-link" : "sn-create-link sn-create-link-disabled",
+			onclick: function() {
+				if (!vnode.state.valid) {
+					return;
+				}
+				m.route.set("/edit/:key", {key: vnode.state.name});
+			},
+		}, "Create");
+		return m("div", [
+			m("h3", "Create"),
+			inputField, " ", createButton,
+		])
+	},
+}
+
 var EditorPage = {
 	view: function(vnode) {
 		return m("div.editor", m(Editor));
@@ -63,32 +121,11 @@ var EditorPage = {
 
 var MainPage = {
 	view: function(vnode) {
-		let list = [];
-		for (var i = 0; i < localStorage.length; i++) {
-			let key = localStorage.key(i);
-			if (key.startsWith("note-")) {
-				let noteName = key.replace("note-", "");
-				list.push(m("li", [
-					m("a", {oncreate: m.route.link, href: "/edit/"+noteName}, noteName),
-					" ",
-					m("a", {onclick: function() {
-						if (confirm("Are you sure you want to delete this note?")) {
-							localStorage.removeItem(key);
-						}
-					}}, "Delete"),
-				]));
-			}
-		}
-		return [
+		return m("div.main-page", [
 			m("h1", "Notes"),
-			m("ul", list.sort(function(a, b) {
-				let x = a.children[0].text.toLowerCase();
-				let y = b.children[0].text.toLowerCase();
-				if (x < y) {return -1};
-				if (x > y) {return 1};
-				return 0;
-			})),
-		];
+			m(NotesList),
+			m(NewNoteForm),
+		]);
 	},
 }
 

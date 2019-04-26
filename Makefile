@@ -1,4 +1,4 @@
-serve/serve:
+serve/serve: serve/main.go
 	GOARCH=amd64 GOOS=linux go build -o serve/serve serve/main.go
 
 web/static/js/app.min.js:
