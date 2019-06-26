@@ -11,9 +11,9 @@ web/static/css/style.min.css: web/static/js/app.min.js
 
 .PHONY: docker-image
 docker-image: serve/serve web/static/js/app.min.js web/static/css/style.min.css
-	docker build . -t preetamjinka/shadow-notes:latest
+	docker build . -t preetamjinka/contrast-notes:latest
 
 
 .PHONY: push-docker-image
 push-docker-image: docker-image
-	docker push preetamjinka/shadow-notes:latest
+	docker push preetamjinka/contrast-notes:latest
