@@ -1,4 +1,4 @@
-# shadow-notes
+# Contrast notes
 
 A simple Markdown notes app.
 
