@@ -1,5 +1,6 @@
 var m = require("mithril");
 var showdown = require("showdown");
+var FileSaver = require('file-saver');
 
 var converter = new showdown.Converter()
 
@@ -70,6 +71,10 @@ var NotesList = {
 								localStorage.removeItem(key);
 							}
 						}}, "Delete"),
+						m("a.sn-save-link", {onclick: function() {
+							var blob = new Blob([localStorage.getItem(key)], {type: "text/plain;charset=utf-8"});
+							FileSaver.saveAs(blob, key+".md");
+						}}, "Save"),
 					])
 				]));
 			}

@@ -1,18 +1,19 @@
 {
-  "name": "shadow-notes",
+  "name": "contrast",
   "version": "1.0.0",
-  "description": "Shadow Notes app",
+  "description": "Contrast Notes app",
   "scripts": {
     "test": "ospec",
     "start": "webpack --config webpack.dev.js --watch",
     "build": "webpack --config webpack.prod.js"
   },
   "keywords": [],
-  "repository": "github.com/Preetam/shadow-notes",
+  "repository": "github.com/Preetam/contrast",
   "license": "UNLICENSED",
   "dependencies": {
     "clean-css": "^4.2.1",
     "clean-css-cli": "^4.3.0",
+    "file-saver": "^2.0.1",
     "mithril": "^1.1.6",
     "showdown": "^1.9.0"
   },

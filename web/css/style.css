@@ -5,10 +5,10 @@ html, body {
 	margin: 0;
 	padding: 0;
 	-webkit-font-smoothing: antialiased;
+	background-color: #fafafa;
 }
 
 #app, .editor {
-	background-color: #fafafa;
 	height: 100%;
 }
 
@@ -21,6 +21,10 @@ textarea, .result {
 	padding: 0 20px;
 }
 
+.result {
+	overflow: auto;
+}
+
 textarea {
 	outline: none;
 	resize: none;
@@ -28,6 +32,7 @@ textarea {
 	color: #fff;
 	font-family: monospace;
 	padding: 20px;
+	border: none;
 }
 
 .status {
@@ -57,12 +62,12 @@ textarea {
 	font-size: 1.5rem;
 }
 
-.sn-delete-link, .sn-create-link {
+.sn-delete-link, .sn-create-link, .sn-save-link {
 	display: inline-block;
 	border: 1px black solid;
 	text-transform: uppercase;
 	font-size: 8px;
-	margin: 2px 0;
+	margin: 2px 4px 2px 0;
 	padding: 2px;
 	cursor: pointer;
 }
