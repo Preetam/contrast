@@ -1,5 +1,5 @@
 html, body {
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 	font-size: 14px;
 	height: 100%;
 	margin: 0;
@@ -15,7 +15,7 @@ html, body {
 textarea, .result {
 	display: inline-block;
 	width: 49%;
-	height: calc(100% - 60px);
+	height: calc(100% - 3rem);
 	vertical-align: top;
 	box-sizing: border-box;
 	padding: 0 20px;
@@ -47,22 +47,22 @@ textarea {
 	max-width: 95%;
 }
 
-.sn-notes-list {
+.cn-notes-list {
 	list-style: none;
 	padding: 0;
 }
 
-.sn-notes-list li {
+.cn-notes-list li {
 	margin: 1rem 0;
 }
 
-.sn-note-list-link {
+.cn-note-list-link {
 	text-decoration: none;
 	color: black;
 	font-size: 1.5rem;
 }
 
-.sn-delete-link, .sn-create-link, .sn-save-link {
+.cn-delete-link, .cn-create-link, .cn-save-link {
 	display: inline-block;
 	border: 1px black solid;
 	text-transform: uppercase;
@@ -72,14 +72,56 @@ textarea {
 	cursor: pointer;
 }
 
-.sn-create-input, .sn-create-link {
+.cn-create-input, .cn-create-link {
 	font-size: 10px;
 	padding: 2px;
 	margin: 0 !important;
 }
 
-.sn-create-link-disabled {
+.cn-create-link-disabled {
 	border-color: #888;
 	color: #888;
 	cursor: default;
+}
+
+.cn-editor-statusbar {
+	height: 3rem;
+	line-height: 3rem;
+	background: black;
+	color: #888;
+	padding: 0 1rem;
+}
+
+.cn-statusbar-status-text {
+	float: right;
+}
+
+.cn-statusbar-site-name {
+	color: white;
+	text-decoration: none;
+	font-weight: bold;
+	line-height: 3rem;
+}
+
+/* Landing */
+
+.cn-landing-header {
+	color: white;
+	background: black;
+	font-size: 3rem;
+	min-height: 3m;
+	padding: 10rem 0;
+	text-align: center;
+}
+
+.cn-get-started-button {
+	color: white;
+	display: inline-block;
+	border: 1px white solid;
+	text-transform: uppercase;
+	font-size: 1rem;
+	margin: 3rem;
+	padding: 4px;
+	cursor: pointer;
+	text-decoration: none;
 }
