@@ -11,7 +11,7 @@ var Editor = {
 		vnode.state.html = '';
 		vnode.state.timer = 0;
 		vnode.state.status = "OK";
-
+		vnode.state.editView = true;
 
 		vnode.state.save = function() {
 			localStorage.setItem("note-"+this.noteID, this.md);
@@ -25,9 +25,24 @@ var Editor = {
 		vnode.state.load();
 	},
 	view: function(vnode) {
+		if (!vnode.state.editView) {
+			return [
+				m("div.cn-editor-statusbar", [
+					m("a.cn-statusbar-site-name", {oncreate: m.route.link, href: "/"}, "Contrast"),
+					m("a.cn-statusbar-view-toggle", {onclick: function() {vnode.state.editView = !vnode.state.editView}}, "Toggle view"),
+					m("div.cn-statusbar-status-text", vnode.state.status),
+				]),
+				m("div.result", {
+					style: {
+						width: "100%",
+					}
+				}, m.trust(vnode.state.html)),
+			]
+		}
 		return [
 			m("div.cn-editor-statusbar", [
 				m("a.cn-statusbar-site-name", {oncreate: m.route.link, href: "/"}, "Contrast"),
+				m("a.cn-statusbar-view-toggle", {onclick: function() {vnode.state.editView = !vnode.state.editView}}, "Toggle view"),
 				m("div.cn-statusbar-status-text", vnode.state.status),
 			]),
 			m("textarea", {

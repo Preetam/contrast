@@ -70,6 +70,12 @@ textarea {
 	margin: 2px 4px 2px 0;
 	padding: 2px;
 	cursor: pointer;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .cn-create-input, .cn-create-link {
@@ -103,6 +109,24 @@ textarea {
 	line-height: 3rem;
 }
 
+.cn-statusbar-view-toggle {
+	float: right;
+	color: white;
+	border: 1px white solid;
+	text-transform: uppercase;
+	line-height: 1rem;
+	font-size: 8px;
+	margin: 0.7rem 0 0 1rem;
+	padding: 4px;
+	cursor: pointer;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
 /* Landing */
 
 .cn-landing-header {
@@ -124,4 +148,10 @@ textarea {
 	padding: 4px;
 	cursor: pointer;
 	text-decoration: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
