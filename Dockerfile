@@ -1,4 +1,4 @@
 FROM alpine
-COPY ./web/static /static/
 COPY ./serve/serve /bin/serve
+COPY ./web/static /static/
 CMD serve
