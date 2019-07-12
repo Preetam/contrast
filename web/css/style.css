@@ -25,6 +25,10 @@ textarea, .result {
 	overflow: auto;
 }
 
+.result a {
+	color: black;
+}
+
 textarea {
 	outline: none;
 	resize: none;
