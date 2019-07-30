@@ -15,5 +15,5 @@ func main() {
 		}
 		fs.ServeHTTP(w, r)
 	})
-	http.ListenAndServe(":"+os.Getenv("PORT"), nil)
+	panic(http.ListenAndServe(":"+os.Getenv("PORT"), nil))
 }

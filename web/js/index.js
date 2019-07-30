@@ -28,7 +28,7 @@ var Editor = {
 		if (!vnode.state.editView) {
 			return [
 				m("div.cn-editor-statusbar", [
-					m("a.cn-statusbar-site-name", {oncreate: m.route.link, href: "/"}, "Contrast"),
+					m("a.cn-statusbar-site-name", {oncreate: m.route.link, href: "/"}, "Contrast notes"),
 					m("a.cn-statusbar-view-toggle", {onclick: function() {vnode.state.editView = !vnode.state.editView}}, "Toggle view"),
 					m("div.cn-statusbar-status-text", vnode.state.status),
 				]),
@@ -41,7 +41,7 @@ var Editor = {
 		}
 		return [
 			m("div.cn-editor-statusbar", [
-				m("a.cn-statusbar-site-name", {oncreate: m.route.link, href: "/"}, "Contrast"),
+				m("a.cn-statusbar-site-name", {oncreate: m.route.link, href: "/"}, "Contrast notes"),
 				m("a.cn-statusbar-view-toggle", {onclick: function() {vnode.state.editView = !vnode.state.editView}}, "Toggle view"),
 				m("div.cn-statusbar-status-text", vnode.state.status),
 			]),
