@@ -18,18 +18,11 @@ action "Push image to GCR" {
   args = ["docker push gcr.io/infinitynorm-001/contrast"]
 }
 
-action "Setup Cloud Run CLI" {
-  needs = ["Setup Google Cloud"]
-  uses = "actions/gcloud/cli@master"
-  runs = "sh -c"
-  args = ["gcloud components install beta && gcloud components update"]
-}
-
 action "Deploy Cloud Run Service" {
-  needs = ["Setup Cloud Run CLI", "Push image to GCR"]
+  needs = ["Push image to GCR"]
   uses = "actions/gcloud/cli@master"
   runs = "sh -c"
-  args = ["gcloud --quiet beta run deploy contrast --image gcr.io/infinitynorm-001/contrast:latest --platform managed --region us-central1 --memory 128Mi"]
+  args = ["gcloud components install beta && gcloud components update && gcloud --quiet beta run deploy contrast --image gcr.io/infinitynorm-001/contrast:latest --platform managed --region us-central1 --memory 128Mi"]
 }
 
 # Docker
