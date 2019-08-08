@@ -6,7 +6,7 @@ action "Setup Google Cloud" {
 }
 
 action "Push image to GCR" {
-  needs = ["Setup Google Cloud"]
+  needs = ["Setup Google Cloud", "Docker build"]
   uses = "actions/gcloud/cli@master"
   runs = "sh -c"
   args = ["docker push gcr.io/infinitynorm-001/contrast"]
