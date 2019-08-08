@@ -22,7 +22,7 @@ action "Deploy Cloud Run Service" {
   needs = ["Push image to GCR"]
   uses = "actions/gcloud/cli@master"
   runs = "sh -c"
-  args = ["gcloud components install beta && gcloud components update && gcloud --quiet beta run deploy contrast --image gcr.io/infinitynorm-001/contrast:latest --platform managed --region us-central1 --memory 128Mi"]
+  args = ["gcloud components install beta && gcloud components update && gcloud --quiet --project infinitynorm-001 beta run deploy contrast --image gcr.io/infinitynorm-001/contrast:latest --platform managed --region us-central1 --memory 128Mi"]
 }
 
 # Docker
