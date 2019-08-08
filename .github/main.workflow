@@ -13,14 +13,14 @@ action "Push image to GCR" {
 }
 
 action "Setup Cloud Run CLI" {
-  needs = ["Push image to GCR"]
+  needs = ["Setup Google Cloud", "Push image to GCR"]
   uses = "actions/gcloud/cli@master"
   runs = "sh -c"
   args = ["gcloud components install beta && gcloud components update"]
 }
 
 action "Deploy Cloud Run Service" {
-  needs = ["Setup Cloud Run CLI"]
+  needs = ["Setup Google Cloud", "Setup Cloud Run CLI"]
   uses = "actions/gcloud/cli@master"
   runs = "sh -c"
   args = ["gcloud beta run deploy contrast --image gcr.io/infinitynorm-001/contrast:latest --platform managed --region us-central1 --memory 128Mi"]
