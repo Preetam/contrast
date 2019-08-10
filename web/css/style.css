@@ -5,7 +5,6 @@ html, body {
 	margin: 0;
 	padding: 0;
 	-webkit-font-smoothing: antialiased;
-	background-color: #fafafa;
 }
 
 #app, .editor {
@@ -54,7 +53,7 @@ textarea {
 }
 
 .main-page {
-	margin: 0 auto;
+	margin: 2rem auto;
 	width: 40rem;
 	max-width: 95%;
 }
