@@ -42,7 +42,6 @@ jobs:
     steps:
       - name: Deploy Cloud Run Service
         uses: actions/gcloud/cli@master
-        needs: pushImages
         with:
           entrypoint: sh
           args: -c "gcloud components install beta && gcloud components update && gcloud --quiet --project infinitynorm-001 beta run deploy contrast --image gcr.io/infinitynorm-001/contrast:latest --platform managed --region us-central1 --memory 128Mi"
