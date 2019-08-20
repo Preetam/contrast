@@ -2,6 +2,15 @@ on: push
 
 name: Build and push
 jobs:
+  setupDocker:
+    - name: Docker login
+      uses: actions/docker/login@master
+      env:
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      with:
+        args: DOCKER_USERNAME DOCKER_PASSWORD
+
   setupGoogleCloud:
     name: Setup Google Cloud
     runs-on: ubuntu-latest
@@ -13,30 +22,35 @@ jobs:
         GCLOUD_AUTH: ${{ secrets.GCLOUD_AUTH }}
     - name: Set Credential Helper for Docker
       uses: actions/gcloud/cli@master
+      needs: setupDocker
       with:
         args: auth configure-docker --quiet
-    - name: Docker login
-      uses: actions/docker/login@master
-      env:
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+
+
+  buildImage:
+    - name: Docker build
+      uses: actions/docker/cli@86ff551d26008267bb89ac11198ba7f1d807b699
+      needs: [setupDocker, setupGoogleCloud]
       with:
-        args: DOCKER_USERNAME DOCKER_PASSWORD
+        args: "build -t preetamjinka/contrast-notes:latest -t gcr.io/infinitynorm-001/contrast:latest ."
+
+  pushImages:
     - name: Push image to GCR
       uses: actions/gcloud/cli@master
+      needs: buildImage
       with:
         entrypoint: sh
         args: -c "docker push gcr.io/infinitynorm-001/contrast"
-    - name: Docker build
+    - name: Push image to Docker Hub
       uses: actions/docker/cli@86ff551d26008267bb89ac11198ba7f1d807b699
+      needs: buildImage
       with:
-        args: "build -t preetamjinka/contrast-notes:latest -t gcr.io/infinitynorm-001/contrast:latest ."
+        args: push preetamjinka/contrast-notes:latest
+
+  deploy:
     - name: Deploy Cloud Run Service
       uses: actions/gcloud/cli@master
+      needs: pushImages
       with:
         entrypoint: sh
         args: -c "gcloud components install beta && gcloud components update && gcloud --quiet --project infinitynorm-001 beta run deploy contrast --image gcr.io/infinitynorm-001/contrast:latest --platform managed --region us-central1 --memory 128Mi"
-    - name: Docker push
-      uses: actions/docker/cli@86ff551d26008267bb89ac11198ba7f1d807b699
-      with:
-        args: push preetamjinka/contrast-notes:latest
