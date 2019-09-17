@@ -9,7 +9,8 @@ func main() {
 	fs := http.FileServer(http.Dir("/static"))
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		// Make sure we're on HTTPS
-		if r.Header["X-Forwarded-Proto"][0] == "http" {
+		if len(r.Header["X-Forwarded-Proto"]) > 0 &&
+			r.Header["X-Forwarded-Proto"][0] == "http" {
 			http.Redirect(w, r, "https://"+r.Host+r.RequestURI, http.StatusMovedPermanently)
 			return
 		}
